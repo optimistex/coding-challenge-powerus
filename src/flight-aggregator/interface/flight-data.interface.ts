@@ -11,7 +11,3 @@ export interface Flight {
   slices: FlightSlice[];
   price: number;
 }
-
-export interface FlightData {
-  flights: Flight[];
-}

@@ -8,7 +8,10 @@ import { FlightSourceBuilderService } from './core/flight-source-builder/flight-
 @Global()
 @Module({
   imports: [
-    CoreModule,
+    CoreModule.forRoot({
+      timeout: 800,
+      httpSourceUrls: ['https://coding-challenge.powerus.de/flight/source1', 'https://coding-challenge.powerus.de/flight/source2'],
+    }),
     FlightAggregatorModule.forRootAsync({
       inject: [FlightSourceBuilderService],
       useFactory: (flightSourceBuilderService: FlightSourceBuilderService) => ({
