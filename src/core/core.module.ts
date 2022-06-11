@@ -7,6 +7,6 @@ import { FlightSourceBuilderService } from './flight-source-builder/flight-sourc
 @Module({
   imports: [HttpModule],
   providers: [CacheMemoryService, FlightSourceBuilderService],
-  exports: [CacheMemoryService, FlightSourceBuilderService, HttpModule],
+  exports: [CacheMemoryService, FlightSourceBuilderService],
 })
 export class CoreModule {}

@@ -1,3 +1,4 @@
+import { zip } from 'rxjs';
 import { Inject, Injectable } from '@nestjs/common';
 import { FLIGHT_AGGREGATOR_MODULE_OPTIONS, FlightAggregatorModuleOptions } from '../flight-aggregator.module-options';
 
@@ -7,7 +8,7 @@ export class FlightAggregatorService {
     console.log('FlightAggregatorService', this.options);
   }
 
-  getFlights() {
-    return 'test';
+  public getFlights() {
+    return zip(this.options.flightSources.map((s) => s.get())).pipe();
   }
 }
