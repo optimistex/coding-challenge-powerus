@@ -8,7 +8,7 @@ export class AppController {
   constructor(private flightAggregatorService: FlightAggregatorService) {}
 
   @Get()
-  getHello(): Promise<FlightRaw[]> {
+  getFlights(): Promise<FlightRaw[]> {
     const data2$ = this.flightAggregatorService.getFlights();
     return lastValueFrom(data2$);
   }
