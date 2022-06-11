@@ -1,6 +1,6 @@
 import { of, PartialObserver, Subject, throwError } from 'rxjs';
 import { FlightSource } from '../interface/flight-source.interface';
-import { Flight } from '../interface/flight-data.interface';
+import { FlightRaw } from '../interface/flight-data.interface';
 import { FlightAggregatorCache } from '../interface/flight-aggregator-cache.interface';
 import { FlightSourceHandler } from './flight-source-handler';
 
@@ -53,7 +53,7 @@ describe('FlightSourceHandler', () => {
 
   it('should return cached data when fetch is failed timeout', () => {
     cache.get.mockReturnValue([{ slices: [], price: 300 }]);
-    const testSubject = new Subject<Flight[]>();
+    const testSubject = new Subject<FlightRaw[]>();
     source.getFlights.mockReturnValue(testSubject);
     jest.useFakeTimers();
     sourceHandler.getFlights().subscribe(spyObserver);
