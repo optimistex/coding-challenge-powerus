@@ -16,6 +16,6 @@ export class FlightSourceBuilderService {
   public getSourceList(): FlightSourceHandler[] {
     return this.options.httpSourceUrls
       .map((url) => new HttpFlightSource(this.httpService, url))
-      .map((source) => new FlightSourceHandler(source, this.cacheMemoryService, this.options.timeout));
+      .map((source) => new FlightSourceHandler(source, this.cacheMemoryService, this.options.timeout, this.options.cachingTime));
   }
 }
