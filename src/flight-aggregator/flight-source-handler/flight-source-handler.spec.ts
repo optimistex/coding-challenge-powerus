@@ -1,6 +1,6 @@
 import { of, PartialObserver, Subject, throwError } from 'rxjs';
 import { FlightSource } from '../interface/flight-source.interface';
-import { FlightRaw } from '../interface/flight-data.interface';
+import { FlightRaw, FlightSlice } from '../interface/flight-data.interface';
 import { FlightAggregatorCache } from '../interface/flight-aggregator-cache.interface';
 import { FlightSourceHandler } from './flight-source-handler';
 
@@ -25,15 +25,21 @@ describe('FlightSourceHandler', () => {
   });
 
   it('should fetch data and cache it', () => {
-    source.getFlights.mockReturnValue(of([{ slices: [], price: 100 }]));
+    source.getFlights.mockReturnValue(of([{ slices: [{ flight_number: '123' } as FlightSlice], price: 100 }]));
     sourceHandler.getFlights().subscribe(spyObserver);
 
     expect(spyObserver.next).toBeCalledTimes(1);
-    expect(spyObserver.next).toBeCalledWith([{ slices: [], price: 100 }]);
+    expect(spyObserver.next).toBeCalledWith([
+      { slices: [{ flight_number: '123' }], price: 100, id: 'd1ef4c077ab400f51e7afa2e8ac5449f75d657c60555a0f5917674257c290532' },
+    ]);
     expect(spyObserver.error).not.toBeCalled();
 
     expect(cache.set).toBeCalledTimes(1);
-    expect(cache.set).toBeCalledWith('testSourceId', [{ price: 100, slices: [] }], { maxAge: 1000 });
+    expect(cache.set).toBeCalledWith(
+      'testSourceId',
+      [{ slices: [{ flight_number: '123' }], price: 100, id: 'd1ef4c077ab400f51e7afa2e8ac5449f75d657c60555a0f5917674257c290532' }],
+      { maxAge: 1000 },
+    );
     expect(cache.get).not.toBeCalled();
   });
 
