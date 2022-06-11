@@ -1,6 +1,6 @@
-import { CacheMem } from './cache-mem';
+import { CacheMemoryService } from './cache-memory.service';
 
-describe('CacheMem', () => {
+describe('CacheMemoryService', () => {
   let fakeNowMs: number;
 
   beforeEach(() => {
@@ -9,7 +9,7 @@ describe('CacheMem', () => {
   });
 
   it('Test sync', () => {
-    const cache = new CacheMem();
+    const cache = new CacheMemoryService();
 
     expect(cache.get('wrongKey')).toBe(null);
     expect(cache.get('wrongKey', 55)).toBe(55);
@@ -29,7 +29,7 @@ describe('CacheMem', () => {
   });
 
   it('Test async', async () => {
-    const cache = new CacheMem();
+    const cache = new CacheMemoryService();
 
     const mockCallback1 = jest.fn(() => Promise.resolve(10));
     const mockCallback2 = jest.fn(() => Promise.resolve(20));
@@ -50,7 +50,7 @@ describe('CacheMem', () => {
   });
 
   it('Test clearing single tag', async () => {
-    const cache = new CacheMem();
+    const cache = new CacheMemoryService();
 
     cache.set('test1', 111, { maxAge: 100, tags: ['tag1'] });
     cache.set('test2', 222, { maxAge: 100, tags: ['tag1'] });
@@ -93,7 +93,7 @@ describe('CacheMem', () => {
   });
 
   it('Test clearing multi tags', async () => {
-    const cache = new CacheMem();
+    const cache = new CacheMemoryService();
 
     cache.set('test1', 111, { maxAge: 10, tags: ['tag1'] });
     cache.set('test2', 222, { maxAge: 10, tags: ['tag1'] });
@@ -136,7 +136,7 @@ describe('CacheMem', () => {
   });
 
   it('Test cacheKey with an object', () => {
-    const cache = new CacheMem();
+    const cache = new CacheMemoryService();
 
     const key = cache.cacheKey({ a: '1', b: '2', c: '3' });
     expect(key).toBeTruthy();
@@ -146,7 +146,7 @@ describe('CacheMem', () => {
   });
 
   it('Test cacheKey with a nested object', () => {
-    const cache = new CacheMem();
+    const cache = new CacheMemoryService();
 
     const key = cache.cacheKey({ a: '1', b: '2', c: { c1: '1', c2: '2' } });
     expect(key).toBeTruthy();
@@ -156,7 +156,7 @@ describe('CacheMem', () => {
   });
 
   it('Test cacheKey with an array', () => {
-    const cache = new CacheMem();
+    const cache = new CacheMemoryService();
 
     const key = cache.cacheKey(['testValue', { a: '1', b: '2', c: '3' }]);
     expect(key).toBeTruthy();

@@ -1,8 +1,10 @@
 import * as NodeCache from 'node-cache';
 import * as hash from 'object-hash';
 import { CustomCache, CustomCacheOptions } from './custom-cache';
+import { Injectable } from '@nestjs/common';
 
-export class CacheMem implements CustomCache {
+@Injectable()
+export class CacheMemoryService implements CustomCache {
   private readonly cache: NodeCache;
   private tags: { [name: string]: string[] } = {};
 

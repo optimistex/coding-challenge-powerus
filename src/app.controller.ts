@@ -4,10 +4,18 @@ import { HttpService } from '@nestjs/axios';
 import { lastValueFrom, map, tap } from 'rxjs';
 import { FlightData } from './flight-aggregator/interface/flight-data.interface';
 import { FlightAggregatorService } from './flight-aggregator/flight-aggregator/flight-aggregator.service';
+import { CacheMemoryService } from './core/cache-memory/cache-memory.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService, private httpService: HttpService, private flightAggregatorService: FlightAggregatorService) {}
+  constructor(
+    private readonly appService: AppService,
+    private httpService: HttpService,
+    private flightAggregatorService: FlightAggregatorService,
+    private cache: CacheMemoryService,
+  ) {
+    console.log('cache', this.cache.constructor.name);
+  }
 
   @Get()
   getHello(): Promise<FlightData> {
