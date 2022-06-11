@@ -2,18 +2,17 @@ import { Global, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FlightAggregatorModule } from './flight-aggregator/flight-aggregator.module';
-import { CacheMemoryService } from './core/cache-memory/cache-memory.service';
 import { CoreModule } from './core/core.module';
+import { FlightSourceBuilderService } from './core/flight-source-builder/flight-source-builder.service';
 
 @Global()
 @Module({
   imports: [
     CoreModule,
     FlightAggregatorModule.forRootAsync({
-      inject: [CacheMemoryService],
-      useFactory: (cacheMemoryService) => ({
-        flightSourceProvider: { getSourceList: () => [] },
-        cache: cacheMemoryService,
+      inject: [FlightSourceBuilderService],
+      useFactory: (flightSourceBuilderService: FlightSourceBuilderService) => ({
+        flightSources: flightSourceBuilderService.getSourceList(),
       }),
     }),
   ],
