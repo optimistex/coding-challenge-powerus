@@ -11,3 +11,7 @@ export interface FlightRaw {
   slices: FlightSlice[];
   price: number;
 }
+
+export interface Flight extends FlightRaw {
+  id: string;
+}
