@@ -1,15 +1,9 @@
 export interface CustomCacheOptions {
-  /**
-   * Tag for this key
-   */
-  tags?: string[];
-  /**
-   * Max age in seconds
-   */
+  /** Max age in seconds */
   maxAge: number;
 }
 
-export interface CustomCache {
+export interface FlightAggregatorCache {
   /**
    * Make cache key as a hash from any data
    */
@@ -19,11 +13,6 @@ export interface CustomCache {
    * Get data by a key
    */
   get<T>(key: string, defaultValue?: T): T;
-
-  /**
-   * Get cache and return in a promise. If values has not found returns default promise and cache it.
-   */
-  getAsync<T>(key: string, options: CustomCacheOptions, defaultValueCallback: () => Promise<T>): Promise<T>;
 
   /**
    * Set cache for maxAge seconds

@@ -37,19 +37,13 @@ describe('CacheMem', () => {
     expect(mockCallback1.mock.calls.length).toBe(0);
     expect(mockCallback2.mock.calls.length).toBe(0);
 
-    await cache
-      .getAsync('test', { maxAge: 10 }, mockCallback1)
-      .then((value) => expect(value).toBe(10));
+    await cache.getAsync('test', { maxAge: 10 }, mockCallback1).then((value) => expect(value).toBe(10));
 
     fakeNowMs += 5000;
-    await expect(
-      cache.getAsync('test', { maxAge: 10 }, mockCallback2),
-    ).resolves.toBe(10);
+    await expect(cache.getAsync('test', { maxAge: 10 }, mockCallback2)).resolves.toBe(10);
 
     fakeNowMs += 10000;
-    await expect(
-      cache.getAsync('test', { maxAge: 10 }, mockCallback2),
-    ).resolves.toBe(20);
+    await expect(cache.getAsync('test', { maxAge: 10 }, mockCallback2)).resolves.toBe(20);
 
     expect(mockCallback1.mock.calls.length).toBe(1);
     expect(mockCallback2.mock.calls.length).toBe(1);
@@ -156,15 +150,9 @@ describe('CacheMem', () => {
 
     const key = cache.cacheKey({ a: '1', b: '2', c: { c1: '1', c2: '2' } });
     expect(key).toBeTruthy();
-    expect(cache.cacheKey({ a: '1', b: '2', c: { c1: '1', c2: '2' } })).toBe(
-      key,
-    );
-    expect(cache.cacheKey({ a: '1', b: '2', c: { c2: '2', c1: '1' } })).toBe(
-      key,
-    );
-    expect(
-      cache.cacheKey({ a: '1', b: '2', c: { c1: '1', c2: '3' } }),
-    ).not.toBe(key);
+    expect(cache.cacheKey({ a: '1', b: '2', c: { c1: '1', c2: '2' } })).toBe(key);
+    expect(cache.cacheKey({ a: '1', b: '2', c: { c2: '2', c1: '1' } })).toBe(key);
+    expect(cache.cacheKey({ a: '1', b: '2', c: { c1: '1', c2: '3' } })).not.toBe(key);
   });
 
   it('Test cacheKey with an array', () => {

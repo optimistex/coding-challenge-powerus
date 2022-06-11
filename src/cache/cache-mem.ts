@@ -21,11 +21,7 @@ export class CacheMem implements CustomCache {
     return defaultValue;
   }
 
-  public getAsync<T>(
-    key: string,
-    options: CustomCacheOptions,
-    defaultValueCallback: () => Promise<T>,
-  ): Promise<T> {
+  public getAsync<T>(key: string, options: CustomCacheOptions, defaultValueCallback: () => Promise<T>): Promise<T> {
     if (this.cache.has(key)) {
       return Promise.resolve(this.cache.get<T>(key));
     }
