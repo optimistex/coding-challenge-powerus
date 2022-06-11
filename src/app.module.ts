@@ -1,6 +1,5 @@
 import { Global, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { FlightAggregatorModule } from './flight-aggregator/flight-aggregator.module';
 import { CoreModule } from './core/core.module';
 import { FlightSourceBuilderService } from './core/flight-source-builder/flight-source-builder.service';
@@ -20,6 +19,5 @@ import { FlightSourceBuilderService } from './core/flight-source-builder/flight-
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
