@@ -6,7 +6,11 @@ import { Flight } from '../../flight-aggregator/interface/flight-data.interface'
 export class HttpFlightSource implements FlightSource {
   constructor(private httpService: HttpService, private sourceUrl) {}
 
-  public get(): Observable<Flight[]> {
+  public getId(): string {
+    return this.sourceUrl;
+  }
+
+  public getFlights(): Observable<Flight[]> {
     return this.httpService.get<{ flights: Flight[] }>(this.sourceUrl).pipe(map((response) => response.data.flights || []));
   }
 }
