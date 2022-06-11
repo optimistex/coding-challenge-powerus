@@ -1,4 +1,4 @@
-export interface CacheOptions {
+export interface CustomCacheOptions {
   /**
    * Tag for this key
    */
@@ -9,7 +9,7 @@ export interface CacheOptions {
   maxAge: number;
 }
 
-export interface Cache {
+export interface CustomCache {
   /**
    * Make cache key as a hash from any data
    */
@@ -25,14 +25,14 @@ export interface Cache {
    */
   getAsync<T>(
     key: string,
-    options: CacheOptions,
+    options: CustomCacheOptions,
     defaultValueCallback: () => Promise<T>,
   ): Promise<T>;
 
   /**
    * Set cache for maxAge seconds
    */
-  set<T>(key: string, value: T, options: CacheOptions): void;
+  set<T>(key: string, value: T, options: CustomCacheOptions): void;
 
   /**
    * Remove all data by a tag
