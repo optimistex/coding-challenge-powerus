@@ -1,4 +1,4 @@
-interface FlightSlice {
+export interface FlightSlice {
   origin_name: string;
   destination_name: string;
   departure_date_time_utc: string;
@@ -7,11 +7,11 @@ interface FlightSlice {
   duration: number;
 }
 
-interface Flight {
+export interface Flight {
   slices: FlightSlice[];
   price: number;
 }
 
-export interface FlightSourceData {
+export interface FlightData {
   flights: Flight[];
 }

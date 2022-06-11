@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { HttpService } from '@nestjs/axios';
 import { lastValueFrom, map, tap } from 'rxjs';
-import { FlightSourceData } from './source-data.interface';
+import { FlightData } from './flight-data.interface';
 
 @Controller()
 export class AppController {
@@ -12,9 +12,9 @@ export class AppController {
   ) {}
 
   @Get()
-  getHello(): Promise<FlightSourceData> {
+  getHello(): Promise<FlightData> {
     const data$ = this.httpService
-      .get<FlightSourceData>(
+      .get<FlightData>(
         'https://coding-challenge.powerus.de/flight/source1',
       )
       .pipe(
