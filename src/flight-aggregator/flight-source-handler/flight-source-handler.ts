@@ -6,7 +6,7 @@ import { FlightAggregatorCache } from '../interface/flight-aggregator-cache.inte
 export class FlightSourceHandler {
   constructor(private source: FlightSource, private cache: FlightAggregatorCache, private timeout: number, private cacheMaxAge) {}
 
-  public get(): Observable<Flight[]> {
+  public getFlights(): Observable<Flight[]> {
     return this.source.getFlights().pipe(
       timeout(this.timeout),
       tap((data) => this.cache.set(this.source.getId(), data, { maxAge: this.cacheMaxAge })),

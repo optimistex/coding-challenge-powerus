@@ -26,7 +26,7 @@ describe('FlightSourceHandler', () => {
 
   it('should fetch data and cache it', () => {
     source.getFlights.mockReturnValue(of([{ slices: [], price: 100 }]));
-    sourceHandler.get().subscribe(spyObserver);
+    sourceHandler.getFlights().subscribe(spyObserver);
 
     expect(spyObserver.next).toBeCalledTimes(1);
     expect(spyObserver.next).toBeCalledWith([{ slices: [], price: 100 }]);
@@ -40,7 +40,7 @@ describe('FlightSourceHandler', () => {
   it('should return cached data when fetch is failed', () => {
     cache.get.mockReturnValue([{ slices: [], price: 200 }]);
     source.getFlights.mockReturnValue(throwError(() => new Error()));
-    sourceHandler.get().subscribe(spyObserver);
+    sourceHandler.getFlights().subscribe(spyObserver);
 
     expect(spyObserver.next).toBeCalledTimes(1);
     expect(spyObserver.next).toBeCalledWith([{ slices: [], price: 200 }]);
@@ -56,7 +56,7 @@ describe('FlightSourceHandler', () => {
     const testSubject = new Subject<Flight[]>();
     source.getFlights.mockReturnValue(testSubject);
     jest.useFakeTimers();
-    sourceHandler.get().subscribe(spyObserver);
+    sourceHandler.getFlights().subscribe(spyObserver);
     jest.advanceTimersByTime(750);
     testSubject.next([]);
 

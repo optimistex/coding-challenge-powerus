@@ -9,6 +9,6 @@ export class FlightAggregatorService {
   }
 
   public getFlights() {
-    return zip(this.options.flightSources.map((s) => s.get())).pipe();
+    return zip(this.options.flightSources.map((s) => s.getFlights())).pipe();
   }
 }
