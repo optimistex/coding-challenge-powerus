@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { FlightAggregatorModule } from './flight-aggregator/flight-aggregator.module';
 import { CoreModule } from './core/core.module';
 import { FlightSourceBuilderService } from './core/flight-source-builder/flight-source-builder.service';
+import { environment } from '../environments/environment';
 
 @Global()
 @Module({
@@ -10,7 +11,7 @@ import { FlightSourceBuilderService } from './core/flight-source-builder/flight-
     CoreModule.forRoot({
       cachingTime: 3600, // 1 hour
       timeout: 800,
-      httpSourceUrls: ['https://coding-challenge.powerus.de/flight/source1', 'https://coding-challenge.powerus.de/flight/source2'],
+      httpSourceUrls: environment.httpSourceUrls,
     }),
     FlightAggregatorModule.forRootAsync({
       inject: [FlightSourceBuilderService],
