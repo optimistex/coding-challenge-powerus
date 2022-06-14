@@ -1,5 +1,5 @@
 import { calculateFlightId } from './calculate-flight-id';
-import { FlightRaw } from '../interface/flight-data.interface';
+import { FlightRaw } from '../flight-data.interface';
 
 const testFlight1: FlightRaw = {
   slices: [

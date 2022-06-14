@@ -3,7 +3,7 @@ import { Provider } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { FlightAggregatorService } from './flight-aggregator/flight-aggregator.service';
-import { Flight } from './interface/flight-data.interface';
+import { Flight } from './flight-data.interface';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -12,7 +12,7 @@ describe('AppController', () => {
     const mockFlightAggregatorService: Provider<FlightAggregatorService> = {
       provide: FlightAggregatorService,
       useValue: {
-        getFlights: jest.fn().mockReturnValue(of<Partial<Flight>[]>([{ id: 'f1' }, { id: 'f2' }])),
+        getAggregatedFlights: jest.fn().mockReturnValue(of<Partial<Flight>[]>([{ id: 'f1' }, { id: 'f2' }])),
       } as Partial<FlightAggregatorService> as FlightAggregatorService,
     };
     const app: TestingModule = await Test.createTestingModule({

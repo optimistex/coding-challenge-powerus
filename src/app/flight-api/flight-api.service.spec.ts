@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { HttpFlightSource } from './http-flight-source';
+import { FlightApiService } from './flight-api.service';
 
-describe('HttpFlightSource', () => {
-  let service: HttpFlightSource;
+describe('FlightApiService', () => {
+  let service: FlightApiService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [HttpFlightSource],
+      providers: [FlightApiService],
     }).compile();
 
-    service = module.get<HttpFlightSource>(HttpFlightSource);
+    service = module.get<FlightApiService>(FlightApiService);
   });
 
   it('should be defined', () => {
