@@ -1,9 +1,8 @@
 import { map, Observable } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
-import { FlightSource } from '../../flight-aggregator/interface/flight-source.interface';
-import { FlightRaw } from '../../flight-aggregator/interface/flight-data.interface';
+import { FlightRaw } from '../interface/flight-data.interface';
 
-export class HttpFlightSource implements FlightSource {
+export class HttpFlightSource {
   constructor(private httpService: HttpService, private sourceUrl) {}
 
   public getId(): string {

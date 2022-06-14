@@ -2,8 +2,8 @@ import { of } from 'rxjs';
 import { Provider } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import { FlightAggregatorService } from './flight-aggregator/flight-aggregator/flight-aggregator.service';
-import { Flight } from './flight-aggregator/interface/flight-data.interface';
+import { FlightAggregatorService } from './flight-aggregator/flight-aggregator.service';
+import { Flight } from './interface/flight-data.interface';
 
 describe('AppController', () => {
   let appController: AppController;

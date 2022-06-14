@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
-import { FlightRaw } from './flight-aggregator/interface/flight-data.interface';
-import { FlightAggregatorService } from './flight-aggregator/flight-aggregator/flight-aggregator.service';
+import { FlightRaw } from './interface/flight-data.interface';
+import { FlightAggregatorService } from './flight-aggregator/flight-aggregator.service';
 
 @Controller()
 export class AppController {

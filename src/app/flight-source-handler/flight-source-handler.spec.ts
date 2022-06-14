@@ -1,12 +1,12 @@
 import { of, PartialObserver, Subject, throwError } from 'rxjs';
-import { FlightSource } from '../interface/flight-source.interface';
+import { HttpFlightSource } from '../http-flight-source/http-flight-source';
 import { FlightRaw, FlightSlice } from '../interface/flight-data.interface';
 import { FlightAggregatorCache } from '../interface/flight-aggregator-cache.interface';
 import { FlightSourceHandler } from './flight-source-handler';
 
 describe('FlightSourceHandler', () => {
   let sourceHandler: FlightSourceHandler;
-  let source: jest.Mocked<FlightSource>;
+  let source: jest.Mocked<HttpFlightSource>;
   let cache: jest.Mocked<FlightAggregatorCache>;
   let spyObserver: jest.Mocked<PartialObserver<unknown>>;
 
@@ -14,7 +14,7 @@ describe('FlightSourceHandler', () => {
     source = {
       getId: jest.fn().mockReturnValue('testSourceId'),
       getFlights: jest.fn(),
-    } as jest.Mocked<FlightSource>;
+    } as Partial<HttpFlightSource> as jest.Mocked<HttpFlightSource>;
     cache = { get: jest.fn(), set: jest.fn() } as Partial<FlightAggregatorCache> as jest.Mocked<FlightAggregatorCache>;
     sourceHandler = new FlightSourceHandler(source, cache, 750, 1000);
     spyObserver = { next: jest.fn(), error: jest.fn() };
